@@ -1,8 +1,13 @@
 
-const fs = require('fs');
+import { readFileSync } from 'fs';
 
 const filePath = process.argv[2];
 
-const fileContents = fs.readFileSync(filePath, 'utf8');
+const fileContents = readFileSync(filePath, 'utf8');
 
-console.log(fileContents);
+//console.log(fileContents);
+
+const lines = fileContents.split('\n');
+const newLinesCount = lines.length -1;
+
+console.log(newLinesCount);
