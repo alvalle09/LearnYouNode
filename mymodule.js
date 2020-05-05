@@ -1,12 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = function (args) {
-  const directoryContents = fs.readdir(directory, (error, files) => {
+module.exports = (directory, filterExtension, callback) => {
+  filterExtension = `.${filterExtension}`;
+  fs.readdir(directory, (error, files) => {
+    if (error) {
+      return callback(error);
+    }
+
     const filteredFiles = files.filter((filename) => {
       const extension = path.extname(filename);
       return extension === filterExtension;
     });
-    console.log(filteredFiles.join("\n"));
+    return callback(null, filteredFiles);
   });
 };
